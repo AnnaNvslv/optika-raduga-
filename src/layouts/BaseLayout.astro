@@ -1,0 +1,74 @@
+---
+import "../styles/global.css";
+import { site } from "../data/site";
+import { phones, email } from "../data/contacts";
+import { favicon32DataUri, favicon180DataUri } from "../assets/images";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.title, description = site.description } = Astro.props;
+const canonical = site.domain + "/";
+
+// Schema.org / LocalBusiness (Optician) structured data.
+const openingHours = [
+  { day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], time: "10:30-19:30" },
+  { day: ["Saturday", "Sunday"], time: "11:00-18:00" },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Optician",
+  name: "Оптика Радуга",
+  image: site.domain + "/og-cover.png",
+  url: canonical,
+  telephone: [phones.landline.display, phones.mobile.display],
+  email: email.address,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "проспект Стачек, 72",
+    addressLocality: "Санкт-Петербург",
+    addressCountry: "RU",
+  },
+  openingHoursSpecification: openingHours.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: h.day,
+    opens: h.time.split("-")[0],
+    closes: h.time.split("-")[1],
+  })),
+  priceRange: "$$",
+};
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/png" sizes="32x32" href={favicon32DataUri} />
+    <link rel="apple-touch-icon" sizes="180x180" href={favicon180DataUri} />
+    <meta name="theme-color" content="#faf7f2" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Оптика Радуга" />
+    <meta property="og:image" content={site.domain + "/og-cover.png"} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
