@@ -1,0 +1,20 @@
+{
+  "name": "optika-raduga-site",
+  "version": "1.0.0",
+  "description": "Сайт оптики «Радуга» (Санкт-Петербург) — Astro, статическая генерация.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
+  }
+}

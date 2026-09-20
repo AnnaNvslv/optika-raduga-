@@ -1,0 +1,73 @@
+---
+import Icon from "./Icon.astro";
+import { faq } from "../data/faq";
+---
+
+<section class="section" id="voprosy">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Частые вопросы</p>
+      <h2>Отвечаем без канцелярита</h2>
+    </div>
+
+    <div class="faq-list">
+      {faq.map((item, i) => (
+        <details class="faq-item" {...(i === 0 ? { open: true } : {})}>
+          <summary>
+            <span>{item.question}</span>
+            <Icon name="chevron-down" size={20} class="faq-item__chevron" />
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 820px;
+  }
+
+  .faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    padding: 6px 22px;
+  }
+
+  .faq-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item :global(.faq-item__chevron) {
+    flex: none;
+    color: var(--color-primary);
+    transition: transform 0.15s ease;
+  }
+
+  .faq-item[open] :global(.faq-item__chevron) {
+    transform: rotate(180deg);
+  }
+
+  .faq-item p {
+    color: var(--color-text-muted);
+    margin: 0 0 18px;
+    max-width: none;
+  }
+</style>

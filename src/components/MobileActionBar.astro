@@ -1,0 +1,63 @@
+---
+import Icon from "./Icon.astro";
+import { phones, whatsapp } from "../data/contacts";
+
+const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравствуйте! Хочу узнать про очки в оптике Радуга.")}`;
+---
+
+<div class="mobile-bar" role="navigation" aria-label="Быстрые действия">
+  <a href={phones.landline.href} class="mobile-bar__btn mobile-bar__btn--call">
+    <Icon name="phone" size={22} />
+    <span>Позвонить</span>
+  </a>
+  <a href={whatsappHref} class="mobile-bar__btn mobile-bar__btn--whatsapp" target="_blank" rel="noopener">
+    <Icon name="whatsapp" size={22} />
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<style>
+  .mobile-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    display: flex;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 8px max(8px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom))
+      max(8px, env(safe-area-inset-right));
+    gap: 8px;
+    box-shadow: 0 -6px 18px rgba(35, 38, 43, 0.08);
+  }
+
+  .mobile-bar__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .mobile-bar__btn--call {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .mobile-bar__btn--whatsapp {
+    background: #ecf6e8;
+    color: #2f6b24;
+  }
+
+  @media (min-width: 900px) {
+    .mobile-bar {
+      display: none;
+    }
+  }
+</style>

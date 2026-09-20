@@ -1,0 +1,120 @@
+---
+import Icon from "./Icon.astro";
+import { services } from "../data/services";
+---
+
+<section class="section" id="uslugi">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">С чем мы поможем</p>
+      <h2>Всё, что связано с очками — в одном месте</h2>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s, i) => (
+        <article class="service-card">
+          <span class={`service-card__icon service-card__icon--${i % 4}`}>
+            <Icon name={s.icon} size={26} />
+          </span>
+          <h3>{s.title}</h3>
+          <p>{s.description}</p>
+          {s.details && (
+            <ul class="service-card__details">
+              {s.details.map((d) => <li>{d}</li>)}
+            </ul>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .service-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-l);
+    padding: 26px;
+  }
+
+  .service-card h3 {
+    margin-bottom: 8px;
+  }
+
+  .service-card p {
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .service-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+
+  .service-card__icon--0 {
+    background: #fdecec;
+    color: var(--color-accent-red);
+  }
+  .service-card__icon--1 {
+    background: #fff1e0;
+    color: var(--color-accent-orange);
+  }
+  .service-card__icon--2 {
+    background: #ecf6e8;
+    color: var(--color-accent-green);
+  }
+  .service-card__icon--3 {
+    background: var(--color-primary-tint);
+    color: var(--color-primary);
+  }
+
+  .service-card__details {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .service-card__details li {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .service-card__details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-blue);
+  }
+
+  @media (min-width: 700px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

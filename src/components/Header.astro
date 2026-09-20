@@ -1,0 +1,223 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+import { phones } from "../data/contacts";
+import { logoDataUri } from "../assets/images";
+
+const navLinks = [
+  { href: "#uslugi", label: "Услуги" },
+  { href: "#kak-my-rabotaem", label: "Как мы работаем" },
+  { href: "#o-nas", label: "О нас" },
+  { href: "#voprosy", label: "Вопросы" },
+  { href: "#kontakty", label: "Контакты" },
+];
+---
+
+<header class="site-header">
+  <div class="container site-header__row">
+    <a href="#top" class="brand">
+      <img src={logoDataUri} width="140" height="90" alt={`Оптика ${site.brandName}`} class="brand__logo" />
+    </a>
+
+    <nav class="main-nav" aria-label="Основная навигация">
+      <ul>
+        {navLinks.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href={phones.landline.href} class="header-phone">
+        <Icon name="phone" size={20} />
+        <span>{phones.landline.display}</span>
+      </a>
+      <a href={phones.landline.href} class="btn btn--primary header-cta">Позвонить</a>
+      <details class="menu-toggle" id="mobile-menu">
+        <summary aria-label="Открыть меню">
+          <Icon name="menu" size={26} class="menu-toggle__open" />
+          <Icon name="close" size={26} class="menu-toggle__close" />
+        </summary>
+        <div class="mobile-menu">
+          <ul>
+            {navLinks.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+          <a href={phones.landline.href} class="btn btn--primary btn--block">
+            <Icon name="phone" size={20} /> Позвонить: {phones.landline.display}
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement only: this <details> menu already works with no
+  // JavaScript at all (native disclosure widget). We just close it after a
+  // link is tapped, and close it if the viewport grows past the breakpoint.
+  const menu = document.getElementById("mobile-menu") as HTMLDetailsElement | null;
+  if (menu) {
+    menu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        menu.open = false;
+      })
+    );
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 247, 242, 0.94);
+    backdrop-filter: saturate(1.1) blur(6px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 76px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+
+  .brand__logo {
+    height: 56px;
+    width: auto;
+  }
+
+  .main-nav {
+    flex: 1;
+    display: none;
+  }
+
+  .main-nav ul {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+  }
+
+  .main-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 8px 2px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .main-nav a:hover {
+    border-color: var(--color-accent-orange);
+  }
+
+  .site-header__actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-phone {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .header-cta {
+    display: none;
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .menu-toggle {
+    position: relative;
+  }
+
+  .menu-toggle summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1.5px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .menu-toggle summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .menu-toggle :global(.menu-toggle__close) {
+    display: none;
+  }
+
+  .menu-toggle[open] :global(.menu-toggle__open) {
+    display: none;
+  }
+
+  .menu-toggle[open] :global(.menu-toggle__close) {
+    display: block;
+  }
+
+  .mobile-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    width: min(88vw, 340px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    background: var(--color-surface);
+    padding: 14px 18px 18px;
+    box-shadow: 0 18px 40px rgba(35, 38, 43, 0.14);
+  }
+
+  .mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 12px 4px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 900px) {
+    .main-nav {
+      display: block;
+    }
+    .header-phone {
+      display: inline-flex;
+    }
+    .header-cta {
+      display: inline-flex;
+    }
+    .menu-toggle {
+      display: none;
+    }
+  }
+</style>
