@@ -1,0 +1,47 @@
+---
+// Renders nothing unless at least one offer in src/data/offers.ts is active.
+import { offers, hasActiveOffers } from "../data/offers";
+---
+
+{hasActiveOffers && (
+  <section class="section section--alt" id="predlozheniya">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Актуальные предложения</p>
+        <h2>Сейчас действует</h2>
+      </div>
+      <div class="offers-grid">
+        {offers.filter((o) => o.active).map((o) => (
+          <article class="offer-card">
+            <h3>{o.title}</h3>
+            <p>{o.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .offers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .offer-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-accent-orange);
+    border-radius: var(--radius-m);
+    padding: 22px 24px;
+  }
+  .offer-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+  @media (min-width: 700px) {
+    .offers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+// Renders nothing until src/data/team.ts has real, confirmed entries.
+import { team, showTeamSection } from "../data/team";
+---
+
+{showTeamSection && (
+  <section class="section" id="komanda">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Наша команда</p>
+        <h2>Кто вам поможет</h2>
+      </div>
+      <div class="team-grid">
+        {team.map((m) => (
+          <article class="team-card">
+            {m.photo && <img src={m.photo} alt={m.name} width="160" height="160" loading="lazy" />}
+            <h3>{m.name}</h3>
+            <p>{m.role}</p>
+            {m.experience && <p class="team-card__exp">{m.experience}</p>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .team-card {
+    text-align: center;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-l);
+    padding: 24px;
+  }
+  .team-card img {
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    object-fit: cover;
+  }
+  .team-card__exp {
+    color: var(--color-text-muted);
+    font-size: 15px;
+  }
+  @media (min-width: 700px) {
+    .team-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

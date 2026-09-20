@@ -1,0 +1,87 @@
+---
+import Icon from "./Icon.astro";
+import { trustPoints } from "../data/trust";
+import { site } from "../data/site";
+
+const years = new Date().getFullYear() - site.foundedYear;
+const yearsLabel = (n: number) => {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return "год";
+  if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return "года";
+  return "лет";
+};
+---
+
+<section class="section" id="doverie">
+  <div class="container trust">
+    <div class="trust__stat">
+      <span class="trust__num">{years}</span>
+      <span class="trust__label">{yearsLabel(years)} в Санкт-Петербурге</span>
+    </div>
+
+    <div class="trust__body">
+      <h2>Оптика, в которую возвращаются семьями</h2>
+      <ul class="trust__list">
+        {trustPoints.map((p) => (
+          <li><Icon name="check" size={18} />{p}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust {
+    display: grid;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .trust__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--radius-l);
+    padding: 30px 28px;
+  }
+
+  .trust__num {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .trust__label {
+    margin-top: 8px;
+    font-size: 17px;
+    opacity: 0.92;
+  }
+
+  .trust__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .trust__list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .trust__list :global(svg) {
+    color: var(--color-accent-green);
+    flex: none;
+    margin-top: 3px;
+  }
+
+  @media (min-width: 860px) {
+    .trust {
+      grid-template-columns: 300px 1fr;
+    }
+  }
+</style>
