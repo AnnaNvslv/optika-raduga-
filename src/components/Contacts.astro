@@ -1,0 +1,143 @@
+---
+import Icon from "./Icon.astro";
+import { phones, whatsapp, vk, email, address, hours, routeUrl } from "../data/contacts";
+
+const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравствуйте! Хочу узнать про очки в оптике Радуга.")}`;
+---
+
+<section class="section section--alt" id="kontakty">
+  <div class="container contacts">
+    <div class="section-head">
+      <p class="eyebrow">Контакты</p>
+      <h2>Как нас найти</h2>
+    </div>
+
+    <div class="contacts__grid">
+      <div class="contacts__card">
+        <h3><Icon name="pin" size={20} /> Адрес</h3>
+        <p>{address.full}</p>
+        <p>{address.building}</p>
+        <p>{address.entrance}</p>
+        <p>{address.landmark}</p>
+        <p class="contacts__muted">{address.forNavigator}</p>
+        <a href={routeUrl} class="btn btn--secondary" target="_blank" rel="noopener">
+          <Icon name="route" size={18} /> Построить маршрут
+        </a>
+      </div>
+
+      <div class="contacts__card">
+        <h3><Icon name="clock" size={20} /> Режим работы</h3>
+        <ul class="contacts__hours">
+          {hours.map((h) => (
+            <li><span>{h.label}</span><span>{h.value}</span></li>
+          ))}
+        </ul>
+        <p class="contacts__muted">{address.metroNote}</p>
+      </div>
+
+      <div class="contacts__card">
+        <h3><Icon name="phone" size={20} /> Связаться</h3>
+        <ul class="contacts__links">
+          <li>
+            <a href={phones.landline.href}><Icon name="phone" size={18} /> {phones.landline.display}</a>
+          </li>
+          <li>
+            <a href={phones.mobile.href}><Icon name="phone" size={18} /> {phones.mobile.display}</a>
+          </li>
+          <li>
+            <a href={whatsappHref} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> WhatsApp</a>
+          </li>
+          <li>
+            <a href={vk.href} target="_blank" rel="noopener"><Icon name="vk" size={18} /> ВКонтакте</a>
+          </li>
+          <li>
+            <a href={email.href}><Icon name="mail" size={18} /> {email.address}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contacts__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contacts__card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-l);
+    padding: 26px;
+  }
+
+  .contacts__card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .contacts__card h3 :global(svg) {
+    color: var(--color-primary);
+  }
+
+  .contacts__card p {
+    margin: 0 0 6px;
+    color: var(--color-text);
+  }
+
+  .contacts__muted {
+    color: var(--color-text-muted) !important;
+    font-size: 15px;
+    margin-top: 10px !important;
+  }
+
+  .contacts__card .btn {
+    margin-top: 16px;
+  }
+
+  .contacts__hours {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contacts__hours li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 17px;
+    font-weight: 700;
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 8px;
+  }
+
+  .contacts__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contacts__links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    min-height: 44px;
+  }
+
+  .contacts__links :global(svg) {
+    color: var(--color-primary);
+    flex: none;
+  }
+
+  @media (min-width: 860px) {
+    .contacts__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

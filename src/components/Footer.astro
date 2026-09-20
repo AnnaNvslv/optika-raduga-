@@ -1,0 +1,97 @@
+---
+import { site } from "../data/site";
+import { phones, vk, address } from "../data/contacts";
+import { logoDataUri } from "../assets/images";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__row">
+    <div class="site-footer__brand">
+      <img src={logoDataUri} width="120" height="77" alt={`Оптика ${site.brandName}`} />
+      <p>{address.short}</p>
+      <p>{phones.landline.display}</p>
+    </div>
+    <nav aria-label="Ссылки">
+      <a href="#uslugi">Услуги</a>
+      <a href="#kak-my-rabotaem">Как мы работаем</a>
+      <a href="#o-nas">О нас</a>
+      <a href="#voprosy">Вопросы</a>
+      <a href="#kontakty">Контакты</a>
+      <a href={vk.href} target="_blank" rel="noopener">ВКонтакте</a>
+    </nav>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>© {year} Оптика «{site.brandName}». Санкт-Петербург.</p>
+    <p class="site-footer__note">
+      Проверка зрения для подбора очков не является медицинской диагностикой
+      или лечением заболеваний.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    border-top: 1px solid var(--color-border);
+    padding-block: 44px 26px;
+  }
+
+  .site-footer__row {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .site-footer__brand img {
+    margin-bottom: 12px;
+  }
+
+  .site-footer__brand p {
+    margin: 0 0 4px;
+    color: var(--color-text-muted);
+    font-size: 15px;
+  }
+
+  .site-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 22px;
+  }
+
+  .site-footer nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .site-footer nav a:hover {
+    color: var(--color-primary);
+  }
+
+  .site-footer__bottom {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .site-footer__bottom p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 13.5px;
+  }
+
+  @media (min-width: 780px) {
+    .site-footer__row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+</style>
