@@ -5,14 +5,14 @@ import { faq } from "../data/faq";
 
 <section class="section" id="voprosy">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">Частые вопросы</p>
       <h2>Отвечаем без канцелярита</h2>
     </div>
 
     <div class="faq-list">
       {faq.map((item, i) => (
-        <details class="faq-item" {...(i === 0 ? { open: true } : {})}>
+        <details class="faq-item" data-reveal style={`transition-delay:${(i % 4) * 70}ms`} {...(i === 0 ? { open: true } : {})}>
           <summary>
             <span>{item.question}</span>
             <Icon name="chevron-down" size={20} class="faq-item__chevron" />

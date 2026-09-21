@@ -1,31 +1,33 @@
 ---
 import Icon from "./Icon.astro";
-import { phones, whatsapp, vk, email, address, hours, routeUrl } from "../data/contacts";
+import { phones, whatsapp, vk, email, address, hours, routeUrl, mapEmbedUrl } from "../data/contacts";
 
 const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравствуйте! Хочу узнать про очки в оптике Радуга.")}`;
 ---
 
 <section class="section section--alt" id="kontakty">
   <div class="container contacts">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">Контакты</p>
       <h2>Как нас найти</h2>
     </div>
 
     <div class="contacts__grid">
-      <div class="contacts__card">
+      <div class="contacts__card" data-reveal>
         <h3><Icon name="pin" size={20} /> Адрес</h3>
-        <p>{address.full}</p>
-        <p>{address.building}</p>
-        <p>{address.entrance}</p>
-        <p>{address.landmark}</p>
+        <a href={routeUrl} target="_blank" rel="noopener" class="contacts__address-link">
+          <p>{address.full}</p>
+          <p>{address.building}</p>
+          <p>{address.entrance}</p>
+          <p>{address.landmark}</p>
+        </a>
         <p class="contacts__muted">{address.forNavigator}</p>
         <a href={routeUrl} class="btn btn--secondary" target="_blank" rel="noopener">
           <Icon name="route" size={18} /> Построить маршрут
         </a>
       </div>
 
-      <div class="contacts__card">
+      <div class="contacts__card" data-reveal style="transition-delay:80ms">
         <h3><Icon name="clock" size={20} /> Режим работы</h3>
         <ul class="contacts__hours">
           {hours.map((h) => (
@@ -35,7 +37,7 @@ const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравст
         <p class="contacts__muted">{address.metroNote}</p>
       </div>
 
-      <div class="contacts__card">
+      <div class="contacts__card" data-reveal style="transition-delay:160ms">
         <h3><Icon name="phone" size={20} /> Связаться</h3>
         <ul class="contacts__links">
           <li>
@@ -55,6 +57,17 @@ const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравст
           </li>
         </ul>
       </div>
+    </div>
+
+    <div class="contacts__map" data-reveal style="transition-delay:220ms">
+      <iframe
+        src={mapEmbedUrl}
+        width="100%"
+        height="360"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title="Оптика Радуга на карте — проспект Стачек, 72"
+      ></iframe>
     </div>
   </div>
 </section>
@@ -87,6 +100,24 @@ const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравст
   .contacts__card p {
     margin: 0 0 6px;
     color: var(--color-text);
+  }
+
+  .contacts__address-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    margin: -4px -6px 0;
+    padding: 4px 6px;
+    transition: background-color 0.15s ease;
+  }
+
+  .contacts__address-link:hover {
+    background: var(--color-primary-tint);
+  }
+
+  .contacts__address-link p:first-child {
+    font-weight: 700;
   }
 
   .contacts__muted {
@@ -133,6 +164,26 @@ const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравст
   .contacts__links :global(svg) {
     color: var(--color-primary);
     flex: none;
+  }
+
+  .contacts__map {
+    margin-top: 28px;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .contacts__map iframe {
+    display: block;
+    width: 100%;
+    height: 360px;
+    border: 0;
+  }
+
+  @media (max-width: 640px) {
+    .contacts__map iframe {
+      height: 260px;
+    }
   }
 
   @media (min-width: 860px) {

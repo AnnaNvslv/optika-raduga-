@@ -40,6 +40,14 @@ export const routeUrl =
   "https://yandex.ru/maps/?text=" +
   encodeURIComponent("Санкт-Петербург, проспект Стачек, 72");
 
+// Embeddable map widget for the "Контакты" section. Uses the same safe,
+// address-based query (no API key, no unconfirmed organization-card ID) —
+// see CONTENT_TO_CONFIRM.md item 10 for how to upgrade this to a confirmed
+// organization card with reviews once you have the link.
+export const mapEmbedUrl =
+  "https://yandex.ru/map-widget/v1/?z=16&text=" +
+  encodeURIComponent("Санкт-Петербург, проспект Стачек, 72");
+
 export const hours = [
   { label: "Пн–Пт", value: "10:30–19:30" },
   { label: "Сб–Вс", value: "11:00–18:00" },

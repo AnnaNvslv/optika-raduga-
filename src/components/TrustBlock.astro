@@ -15,12 +15,12 @@ const yearsLabel = (n: number) => {
 
 <section class="section" id="doverie">
   <div class="container trust">
-    <div class="trust__stat">
+    <div class="trust__stat" data-reveal>
       <span class="trust__num">{years}</span>
       <span class="trust__label">{yearsLabel(years)} в Санкт-Петербурге</span>
     </div>
 
-    <div class="trust__body">
+    <div class="trust__body" data-reveal style="transition-delay:100ms">
       <h2>Оптика, в которую возвращаются семьями</h2>
       <ul class="trust__list">
         {trustPoints.map((p) => (

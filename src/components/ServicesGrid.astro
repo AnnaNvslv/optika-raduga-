@@ -5,14 +5,14 @@ import { services } from "../data/services";
 
 <section class="section" id="uslugi">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">С чем мы поможем</p>
       <h2>Всё, что связано с очками — в одном месте</h2>
     </div>
 
     <div class="services-grid">
       {services.map((s, i) => (
-        <article class="service-card">
+        <article class="service-card" data-reveal style={`transition-delay:${(i % 3) * 80}ms`}>
           <span class={`service-card__icon service-card__icon--${i % 4}`}>
             <Icon name={s.icon} size={26} />
           </span>

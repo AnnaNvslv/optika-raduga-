@@ -4,14 +4,14 @@ import { orderSteps } from "../data/steps";
 
 <section class="section section--alt" id="kak-my-rabotaem">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">Как заказать очки</p>
       <h2>Четыре простых шага</h2>
     </div>
 
     <ol class="steps">
       {orderSteps.map((s, i) => (
-        <li class="step">
+        <li class="step" data-reveal style={`transition-delay:${i * 80}ms`}>
           <span class="step__num">{i + 1}</span>
           <div>
             <h3>{s.title}</h3>
