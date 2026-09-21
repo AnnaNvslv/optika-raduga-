@@ -1,4 +1,5 @@
 ---
+import BrandCorner from "./BrandCorner.astro";
 import { site } from "../data/site";
 import { phones, vk, address } from "../data/contacts";
 import { logoDataUri } from "../assets/images";
@@ -7,6 +8,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
+  <BrandCorner position="bottom-left" size={360} />
   <div class="container site-footer__row">
     <div class="site-footer__brand">
       <img src={logoDataUri} width="120" height="77" alt={`Оптика ${site.brandName}`} />
@@ -33,6 +35,8 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
+    position: relative;
+    overflow: hidden;
     background: var(--color-bg-alt);
     color: var(--color-text);
     border-top: 1px solid var(--color-border);
@@ -40,6 +44,8 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__row {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -73,6 +79,8 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__bottom {
+    position: relative;
+    z-index: 1;
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid var(--color-border);

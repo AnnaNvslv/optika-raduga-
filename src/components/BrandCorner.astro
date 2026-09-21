@@ -1,0 +1,50 @@
+---
+// Decorative echo of the logo's own rainbow-ring iris (see src/assets/images.ts
+// logoDataUri) — four brand-color arcs, cropped into a page corner as a
+// subtle brand accent. Pure CSS (conic-gradient + radial mask), no image.
+export interface Props {
+  position?: "top-right" | "bottom-left";
+  size?: number;
+}
+
+const { position = "top-right", size = 420 } = Astro.props;
+---
+
+<div class={`brand-corner brand-corner--${position}`} style={`--ring-size:${size}px`} aria-hidden="true"></div>
+
+<style>
+  .brand-corner {
+    position: absolute;
+    width: var(--ring-size);
+    height: var(--ring-size);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    background: conic-gradient(
+      var(--color-accent-red) 0deg 90deg,
+      var(--color-accent-orange) 90deg 180deg,
+      var(--color-accent-green) 180deg 270deg,
+      var(--color-primary) 270deg 360deg
+    );
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 15%), #000 calc(100% - 14%));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 15%), #000 calc(100% - 14%));
+  }
+
+  .brand-corner--top-right {
+    top: -20%;
+    right: -16%;
+    transform: rotate(12deg);
+  }
+
+  .brand-corner--bottom-left {
+    bottom: -22%;
+    left: -18%;
+    transform: rotate(-8deg);
+  }
+
+  @media (max-width: 640px) {
+    .brand-corner {
+      opacity: 0.75;
+    }
+  }
+</style>

@@ -2,13 +2,14 @@
 
 :root {
   /* Brand palette, taken from the confirmed logo spec (see
-     "Радуга логотип презентация.pdf"). */
-  --color-bg: #faf7f2;
-  --color-bg-alt: #f3efe7;
+     "Радуга логотип презентация.pdf" / src/assets/images.ts logoDataUri):
+     white background, blue eye outline, four-color rainbow ring in the iris. */
+  --color-bg: #ffffff;
+  --color-bg-alt: #f6f6f7;
   --color-surface: #ffffff;
   --color-text: #23262b;
   --color-text-muted: #5a5e64;
-  --color-border: #e4ddd0;
+  --color-border: #e7e7e9;
 
   --color-primary: #3669b2;
   --color-primary-dark: #274c82;

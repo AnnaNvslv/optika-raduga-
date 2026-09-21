@@ -1,11 +1,12 @@
 ---
 import Icon from "./Icon.astro";
+import BrandCorner from "./BrandCorner.astro";
 import { phones, whatsapp, address, hours, routeUrl } from "../data/contacts";
 import { site } from "../data/site";
 
 const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравствуйте! Хочу узнать про очки в оптике Радуга.")}`;
 
-// See CONTENT_TO_CONFIRM.md item 13: /images/hero.webp is a stock/illustrative
+// See CONTENT_TO_CONFIRM.md item 0/13: /images/hero.webp is a stock/illustrative
 // placeholder, not a real photo of this shop. Swap it for real photography
 // (the file itself, same path) whenever you have it — no code change needed.
 const heroPhoto = "/images/hero.webp";
@@ -19,6 +20,7 @@ const chips = [
 ---
 
 <section class="hero" id="top">
+  <BrandCorner position="top-right" size={460} />
   <div class="container hero__row">
     <div class="hero__copy">
       <p class="hero__brand">{site.brandName} · {site.brandTagline}</p>
@@ -76,9 +78,12 @@ const chips = [
   .hero {
     padding-block: clamp(36px, 6vw, 64px) var(--space-section);
     overflow: hidden;
+    position: relative;
   }
 
   .hero__row {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
