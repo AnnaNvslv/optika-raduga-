@@ -2,9 +2,13 @@
 import Icon from "./Icon.astro";
 import { phones, whatsapp, address, hours, routeUrl } from "../data/contacts";
 import { site } from "../data/site";
-import { heroIconDataUri } from "../assets/images";
 
 const whatsappHref = `${whatsapp.href}?text=${encodeURIComponent("Здравствуйте! Хочу узнать про очки в оптике Радуга.")}`;
+
+// See CONTENT_TO_CONFIRM.md item 13: /images/hero.webp is a stock/illustrative
+// placeholder, not a real photo of this shop. Swap it for real photography
+// (the file itself, same path) whenever you have it — no code change needed.
+const heroPhoto = "/images/hero.webp";
 
 const chips = [
   `Работаем с ${site.foundedYear} года`,
@@ -62,7 +66,7 @@ const chips = [
 
     <div class="hero__visual" aria-hidden="true">
       <div class="hero__blob">
-        <img src={heroIconDataUri} width="220" height="220" alt="" loading="eager" />
+        <img src={heroPhoto} width="640" height="640" alt="" loading="eager" />
       </div>
     </div>
   </div>
@@ -156,33 +160,33 @@ const chips = [
   }
 
   .hero__blob {
-    width: min(300px, 70vw);
+    width: min(320px, 72vw);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: radial-gradient(
-      circle at 35% 30%,
-      var(--color-primary-tint),
-      var(--color-bg-alt) 70%
-    );
+    background: var(--color-surface);
+    padding: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     animation: heroBlobPulse 6s ease-in-out infinite;
+    box-shadow: 0 20px 50px rgba(35, 38, 43, 0.12);
   }
 
   .hero__blob::before {
     content: "";
     position: absolute;
-    inset: 10%;
+    inset: -8px;
     border-radius: 50%;
     border: 3px dashed var(--color-border);
   }
 
   .hero__blob img {
     position: relative;
-    width: 60%;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .hero__copy {
@@ -206,7 +210,7 @@ const chips = [
       transform: scale(1);
     }
     50% {
-      transform: scale(1.035);
+      transform: scale(1.02);
     }
   }
 

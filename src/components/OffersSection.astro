@@ -1,21 +1,26 @@
 ---
-// Renders nothing unless at least one offer in src/data/offers.ts is active.
+// Promo banner. Renders only if at least one offer in src/data/offers.ts is
+// active. See CONTENT_TO_CONFIRM.md item 8/13: the background photo is a
+// stock/illustrative placeholder (file uploaded manually to
+// public/images/promo-banner.webp — same reason as hero.webp), and the
+// current offer text is a safe placeholder until Anna sends real conditions.
 import { offers, hasActiveOffers } from "../data/offers";
+
+const bannerPhoto = "/images/promo-banner.webp";
 ---
 
 {hasActiveOffers && (
-  <section class="section section--alt" id="predlozheniya">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Актуальные предложения</p>
-        <h2>Сейчас действует</h2>
-      </div>
-      <div class="offers-grid">
+  <section class="promo-banner" id="predlozheniya" data-reveal>
+    <div class="promo-banner__media" style={`background-image:url(${bannerPhoto})`} aria-hidden="true"></div>
+    <div class="promo-banner__scrim" aria-hidden="true"></div>
+    <div class="container promo-banner__inner">
+      <p class="eyebrow eyebrow--light">Акции</p>
+      <div class="promo-banner__offers">
         {offers.filter((o) => o.active).map((o) => (
-          <article class="offer-card">
-            <h3>{o.title}</h3>
+          <div class="promo-banner__offer">
+            <h2>{o.title}</h2>
             <p>{o.description}</p>
-          </article>
+          </div>
         ))}
       </div>
     </div>
@@ -23,25 +28,59 @@ import { offers, hasActiveOffers } from "../data/offers";
 )}
 
 <style>
-  .offers-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .promo-banner {
+    position: relative;
+    margin: var(--space-section) auto;
+    max-width: var(--content-max);
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
   }
-  .offer-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-left: 5px solid var(--color-accent-orange);
-    border-radius: var(--radius-m);
-    padding: 22px 24px;
+
+  .promo-banner__media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
   }
-  .offer-card p {
+
+  .promo-banner__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba(20, 24, 32, 0.82) 0%,
+      rgba(20, 24, 32, 0.6) 45%,
+      rgba(20, 24, 32, 0.25) 100%
+    );
+  }
+
+  .promo-banner__inner {
+    position: relative;
+    padding-block: 40px;
+    color: #fff;
+  }
+
+  .eyebrow--light {
+    color: #fff;
+  }
+
+  .promo-banner__offers {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 560px;
+  }
+
+  .promo-banner__offer h2 {
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .promo-banner__offer p {
+    color: rgba(255, 255, 255, 0.88);
     margin: 0;
-    color: var(--color-text-muted);
-  }
-  @media (min-width: 700px) {
-    .offers-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 </style>

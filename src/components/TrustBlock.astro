@@ -11,6 +11,16 @@ const yearsLabel = (n: number) => {
   if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return "года";
   return "лет";
 };
+
+// See CONTENT_TO_CONFIRM.md item 13: stock/illustrative photos standing in
+// for real photos of families who actually come to the shop. They only
+// illustrate "all ages" — no names or claims are attached to them.
+const familyPhotos = [
+  { src: "/images/avatar-kid.webp", alt: "" },
+  { src: "/images/avatar-young.webp", alt: "" },
+  { src: "/images/avatar-mid.webp", alt: "" },
+  { src: "/images/avatar-senior.webp", alt: "" },
+];
 ---
 
 <section class="section" id="doverie">
@@ -22,6 +32,14 @@ const yearsLabel = (n: number) => {
 
     <div class="trust__body" data-reveal style="transition-delay:100ms">
       <h2>Оптика, в которую возвращаются семьями</h2>
+
+      <div class="trust__avatars" aria-hidden="true">
+        {familyPhotos.map((p, i) => (
+          <img src={p.src} alt={p.alt} width="56" height="56" loading="lazy" style={`z-index:${familyPhotos.length - i}`} />
+        ))}
+        <span class="trust__avatars-label">Для всей семьи — от детей до старшего поколения</span>
+      </div>
+
       <ul class="trust__list">
         {trustPoints.map((p) => (
           <li><Icon name="check" size={18} />{p}</li>
@@ -60,11 +78,37 @@ const yearsLabel = (n: number) => {
     opacity: 0.92;
   }
 
+  .trust__avatars {
+    display: flex;
+    align-items: center;
+    margin: 18px 0 24px;
+  }
+
+  .trust__avatars img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-bg);
+    margin-left: -14px;
+    box-shadow: 0 4px 10px rgba(35, 38, 43, 0.1);
+  }
+
+  .trust__avatars img:first-child {
+    margin-left: 0;
+  }
+
+  .trust__avatars-label {
+    margin-left: 16px;
+    font-size: 14.5px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+  }
+
   .trust__list {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin-top: 22px;
   }
 
   .trust__list li {
@@ -82,6 +126,17 @@ const yearsLabel = (n: number) => {
   @media (min-width: 860px) {
     .trust {
       grid-template-columns: 300px 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .trust__avatars {
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+    .trust__avatars-label {
+      margin-left: 0;
+      width: 100%;
     }
   }
 </style>
