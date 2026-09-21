@@ -4,6 +4,7 @@
 // stock/illustrative placeholder (file uploaded manually to
 // public/images/promo-banner.webp — same reason as hero.webp), and the
 // current offer text is a safe placeholder until Anna sends real conditions.
+import RingAccent from "./RingAccent.astro";
 import { offers, hasActiveOffers } from "../data/offers";
 
 const bannerPhoto = "/images/promo-banner.webp";
@@ -13,6 +14,15 @@ const bannerPhoto = "/images/promo-banner.webp";
   <section class="promo-banner" id="predlozheniya" data-reveal>
     <div class="promo-banner__media" style={`background-image:url(${bannerPhoto})`} aria-hidden="true"></div>
     <div class="promo-banner__scrim" aria-hidden="true"></div>
+    <RingAccent
+      color="var(--color-accent-orange)"
+      corner="bottom-right"
+      size={200}
+      thickness={36}
+      offsetX={60}
+      offsetY={60}
+      z={1}
+    />
     <div class="container promo-banner__inner">
       <p class="eyebrow eyebrow--light">Акции</p>
       <div class="promo-banner__offers">
@@ -59,6 +69,7 @@ const bannerPhoto = "/images/promo-banner.webp";
 
   .promo-banner__inner {
     position: relative;
+    z-index: 2;
     padding-block: 40px;
     color: #fff;
   }

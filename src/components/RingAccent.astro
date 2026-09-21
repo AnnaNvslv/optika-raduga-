@@ -1,0 +1,54 @@
+---
+// Brand accent: a single-color ring (the brandbook's recurring "arc" motif,
+// same shape as the color swatches on the logo presentation and the Hero
+// mockup on p.7) peeking from a corner of a photo panel. Reserved for photo
+// panels only — Hero and the promo banner — not scattered across plain
+// content sections, so it stays a deliberate signature instead of wallpaper.
+export interface Props {
+  color: string;
+  corner: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  size?: number;
+  thickness?: number;
+  offsetX?: number;
+  offsetY?: number;
+  z?: number;
+}
+
+const {
+  color,
+  corner,
+  size = 260,
+  thickness = 46,
+  offsetX = Math.round(size * 0.32),
+  offsetY = Math.round(size * 0.32),
+  z = 1,
+} = Astro.props;
+
+const vSide = corner.startsWith("top") ? "top" : "bottom";
+const hSide = corner.endsWith("left") ? "left" : "right";
+---
+
+<div
+  class="ring-accent"
+  style={`--ring-color:${color}; --ring-size:${size}px; --ring-thickness:${thickness}px; --ring-z:${z}; ${vSide}:-${offsetY}px; ${hSide}:-${offsetX}px;`}
+  aria-hidden="true"
+></div>
+
+<style>
+  .ring-accent {
+    position: absolute;
+    width: var(--ring-size);
+    height: var(--ring-size);
+    border-radius: 50%;
+    border: var(--ring-thickness) solid var(--ring-color);
+    box-sizing: border-box;
+    z-index: var(--ring-z);
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .ring-accent {
+      transform: scale(0.72);
+    }
+  }
+</style>

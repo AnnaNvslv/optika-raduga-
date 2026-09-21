@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import RingAccent from "./RingAccent.astro";
 import { phones, whatsapp, address, hours, routeUrl } from "../data/contacts";
 import { site } from "../data/site";
 
@@ -19,6 +20,15 @@ const chips = [
 ---
 
 <section class="hero" id="top">
+  <RingAccent
+    color="var(--color-primary)"
+    corner="bottom-left"
+    size={280}
+    thickness={46}
+    offsetX={110}
+    offsetY={150}
+    z={0}
+  />
   <div class="container hero__row">
     <div class="hero__copy">
       <p class="hero__brand">{site.brandName} · {site.brandTagline}</p>
@@ -65,8 +75,19 @@ const chips = [
     </div>
 
     <div class="hero__visual" aria-hidden="true">
-      <div class="hero__blob">
-        <img src={heroPhoto} width="640" height="640" alt="" loading="eager" />
+      <div class="hero__photo">
+        <div class="hero__photo-frame">
+          <img src={heroPhoto} width="900" height="1125" alt="" loading="eager" />
+        </div>
+        <RingAccent
+          color="var(--color-accent-green)"
+          corner="bottom-right"
+          size={220}
+          thickness={40}
+          offsetX={70}
+          offsetY={70}
+          z={2}
+        />
       </div>
     </div>
   </div>
@@ -157,39 +178,25 @@ const chips = [
   }
 
   .hero__visual {
-    display: flex;
-    justify-content: center;
     animation: heroFadeUp 0.9s ease 0.15s both;
   }
 
-  .hero__blob {
-    width: min(320px, 72vw);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--color-surface);
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .hero__photo {
     position: relative;
-    animation: heroBlobPulse 6s ease-in-out infinite;
+    width: 100%;
+  }
+
+  .hero__photo-frame {
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
     box-shadow: 0 20px 50px rgba(35, 38, 43, 0.12);
   }
 
-  .hero__blob::before {
-    content: "";
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    border: 3px dashed var(--color-border);
-  }
-
-  .hero__blob img {
-    position: relative;
+  .hero__photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
   }
 
   .hero__copy {
@@ -204,16 +211,6 @@ const chips = [
     to {
       opacity: 1;
       transform: none;
-    }
-  }
-
-  @keyframes heroBlobPulse {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
     }
   }
 
