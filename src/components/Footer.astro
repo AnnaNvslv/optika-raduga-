@@ -1,5 +1,4 @@
 ---
-import BrandCorner from "./BrandCorner.astro";
 import { site } from "../data/site";
 import { phones, vk, address } from "../data/contacts";
 import { logoDataUri } from "../assets/images";
@@ -8,7 +7,6 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <BrandCorner position="bottom-left" size={360} />
   <div class="container site-footer__row">
     <div class="site-footer__brand">
       <img src={logoDataUri} width="120" height="77" alt={`Оптика ${site.brandName}`} />

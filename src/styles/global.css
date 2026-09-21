@@ -85,15 +85,15 @@ h4 {
 }
 
 h1 {
-  font-size: clamp(30px, 4.4vw, 46px);
+  font-size: clamp(32px, 4.8vw, 48px);
 }
 
 h2 {
-  font-size: clamp(26px, 3.2vw, 34px);
+  font-size: clamp(30px, 3.8vw, 40px);
 }
 
 h3 {
-  font-size: 21px;
+  font-size: 23px;
 }
 
 p {

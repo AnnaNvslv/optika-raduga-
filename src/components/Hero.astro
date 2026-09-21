@@ -1,6 +1,5 @@
 ---
 import Icon from "./Icon.astro";
-import BrandCorner from "./BrandCorner.astro";
 import { phones, whatsapp, address, hours, routeUrl } from "../data/contacts";
 import { site } from "../data/site";
 
@@ -20,7 +19,6 @@ const chips = [
 ---
 
 <section class="hero" id="top">
-  <BrandCorner position="top-right" size={460} />
   <div class="container hero__row">
     <div class="hero__copy">
       <p class="hero__brand">{site.brandName} · {site.brandTagline}</p>
